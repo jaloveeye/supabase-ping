@@ -3,6 +3,11 @@ import { createClient } from '@supabase/supabase-js'
 
 export const runtime = 'edge' // Edge function 사용
 
+
+export const config = {
+  schedule: '0 20 * * *' // UTC 기준 → 한국 오전 5시
+}
+
 export async function GET() {
   const supabase = createClient(
     process.env.SUPABASE_URL!,
