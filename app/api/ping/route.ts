@@ -14,6 +14,11 @@ export async function GET() {
     process.env.SUPABASE_ANON_KEY!
   )
 
+    const supabase2 = createClient(
+    process.env.SUPABASE_URL_2!,
+    process.env.SUPABASE_KEY_2!
+  )
+
   const { data, error } = await supabase
     .from('profiles')
     .select('id')
@@ -24,6 +29,14 @@ export async function GET() {
     return NextResponse.json({ success: false, error: error.message })
   }
 
-  console.log(`✅ Supabase ping success`)
+     const { data: data2, error: error2 } = await supabase2
+      .from('users')
+      .select('id')
+      .limit(1)
+
+    if (error2) throw new Error(`두 번째 프로젝트 오류: ${error2.message}`)
+
+    console.log('✅ 두 프로젝트 모두 ping 성공')
+
   return NextResponse.json({ success: true })
 }
