@@ -16,7 +16,7 @@ export async function GET() {
 
     const supabase2 = createClient(
     process.env.SUPABASE_URL_2!,
-    process.env.SUPABASE_KEY_2!
+    process.env.SUPABASE_ANON_KEY_2!
   )
 
   const { data, error } = await supabase
